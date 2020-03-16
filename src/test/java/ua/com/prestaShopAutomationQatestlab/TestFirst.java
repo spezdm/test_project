@@ -32,6 +32,25 @@ public class TestFirst extends WebDriverSettings {
         System.out.println("Популярные товары указаны в валюте: " + currentStr);
         }
     }
+
+    @Test
+    public void showPrice() {
+     System.out.println("Установить показ цены в USD используя" +
+                        "выпадающий список в шапке сайта.\n");
+     driver.get("http://prestashop-automation.qatestlab.com.ua/ru/");
+     WebElement header = driver.findElement(By.id("header"));
+     header.findElement(By.xpath("//*[@id='_desktop_currency_selector']//i")).click();
+     WebElement dropButton = driver.findElement(By.xpath("//a[@title='Доллар США']"));
+     dropButton.click();
+     WebElement current = driver.findElement(By.xpath("//span[contains(text(), 'USD $')]"));
+     String currentStr = current.getText().trim();
+     System.out.println("Выбрана валюта: " + currentStr);
+    }
+
+    public void Search() {
+
+    }
+
 }
 
 
