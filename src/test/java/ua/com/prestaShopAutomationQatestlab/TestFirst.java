@@ -66,6 +66,16 @@ public class TestFirst extends WebDriverSettings {
         WebElement inputSearch = driver.findElement(By.cssSelector("input.ui-autocomplete-input"));
         inputSearch.sendKeys("dress");
         inputSearch.click();
+        WebElement button = driver.findElement(By.cssSelector("button"));
+        button.click();
+        WebElement goods = driver.findElement(By.xpath("//div[@class='col-md-6 hidden-sm-down total-products']"));
+        goods.click();
+        WebElement goodStr = driver.findElement((By.xpath("//p[contains(text(), 'Товаров: 7.')]")));
+        String goodsStr = goods.getText().trim();
+        System.out.println(goodsStr);
+    }
+
+    public void validatorUSD() {
 
     }
 
