@@ -47,7 +47,25 @@ public class TestFirst extends WebDriverSettings {
      System.out.println("Выбрана валюта: " + currentStr);
     }
 
+    @Test
     public void Search() {
+    System.out.println("Выполнить поиск в каталоге по слову “dress.”");
+    driver.get("http://prestashop-automation.qatestlab.com.ua/ru/");
+    WebElement inputSearch = driver.findElement(By.cssSelector("input.ui-autocomplete-input"));
+    inputSearch.sendKeys("dress");
+    inputSearch.click();
+
+    }
+
+    @Test
+    public void validatorSearch() {
+        System.out.println("Выполнить проверку, что страница \"Результаты поиска\" " +
+                           "содержит надпись \"Товаров: x\", где x -" +
+                           " количество действительно найденных товаров.\n");
+        driver.get("http://prestashop-automation.qatestlab.com.ua/ru/");
+        WebElement inputSearch = driver.findElement(By.cssSelector("input.ui-autocomplete-input"));
+        inputSearch.sendKeys("dress");
+        inputSearch.click();
 
     }
 
