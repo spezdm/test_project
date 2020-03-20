@@ -91,7 +91,7 @@ public class TestFirst extends WebDriverSettings {
         System.out.println("Установить сортировку \"от высокой к низкой.\"\n");
         driver.get("http://prestashop-automation.qatestlab.com.ua/ru/");
         WebElement header = driver.findElement(By.id("header"));
-        header.findElement(By.xpath("//*[@id='_desktop_currency_selector']//i")).click();
+        header.findElement(By.xpath("//*[@id = '_desktop_currency_selector']//i")).click();
         WebElement dropButton = driver.findElement(By.xpath("//a[@title='Доллар США']"));
         dropButton.click();
        WebElement inputSearch = driver.findElement(By.cssSelector("input.ui-autocomplete-input"));
@@ -103,6 +103,34 @@ public class TestFirst extends WebDriverSettings {
         element.findElement(By.xpath("//a[@class ='select-title']")).click();
         WebElement current = driver.findElement(By.xpath("//div[@class ='dropdown-menu']"));
         current.findElement(By.linkText("Цене: от высокой к низкой")).click();;
+    }
+
+    @Test
+    public void validatorSort () {
+       System.out.println("Проверить, что товары отсортированы по цене, " +
+                          "при этом некоторые товары могут быть со скидкой," +
+                          "и при сортировке используется цена без скидки.");
+        driver.get("http://prestashop-automation.qatestlab.com.ua/ru/");
+        WebElement header = driver.findElement(By.id("header"));
+        header.findElement(By.xpath("//*[@id = '_desktop_currency_selector']//i")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@title='Доллар США']"))).click();
+        WebElement inputSearch = driver.findElement(By.cssSelector("input.ui-autocomplete-input"));
+        inputSearch.sendKeys("dress");
+        inputSearch.click();
+        WebElement button = driver.findElement(By.cssSelector("button"));
+        button.click();
+        WebElement element = driver.findElement(By.xpath("//div[@class ='row sort-by-row']"));
+        element.findElement(By.xpath("//a[@class='select-title']")).click();
+        WebElement current = driver.findElement(By.xpath("//div[@class ='dropdown-menu']"));
+        current.findElement(By.linkText("" + "Цене: от высокой к низкой")).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("select-title")));
+        WebElement validatorSort = driver.findElement(By.xpath("//a[contains(text(), 'Цене:')]"));
+        String currentStr = validatorSort.getText();
+        System.out.println(currentStr);
+        if (currentStr.equals("Цене: от высокой к низкой" +"\n" + "\uE5C5")) {
+            System.out.println("Товары отсортированы по цене.");
+        }
     }
 }
 
