@@ -126,7 +126,6 @@ public class TestFirst extends WebDriverSettings {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("select-title")));
         WebElement validatorSort = driver.findElement(By.xpath("//a[contains(text(), 'Цене:')]"));
         String currentStr = validatorSort.getText();
-        System.out.println(currentStr);
         if (currentStr.equals("Цене: от высокой к низкой" +"\n" + "\uE5C5")) {
             System.out.println("Товары отсортированы по цене.");
         }
