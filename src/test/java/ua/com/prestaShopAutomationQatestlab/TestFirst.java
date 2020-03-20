@@ -123,7 +123,6 @@ public class TestFirst extends WebDriverSettings {
         element.findElement(By.xpath("//a[@class='select-title']")).click();
         WebElement current = driver.findElement(By.xpath("//div[@class ='dropdown-menu']"));
         current.findElement(By.linkText("" + "Цене: от высокой к низкой")).click();
-
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("select-title")));
         WebElement validatorSort = driver.findElement(By.xpath("//a[contains(text(), 'Цене:')]"));
         String currentStr = validatorSort.getText();
