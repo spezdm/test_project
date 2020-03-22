@@ -1,4 +1,5 @@
 package ua.com.prestaShopAutomationQatestlab;
+import org.apache.commons.math3.util.Precision;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.math.BigDecimal;
 
 public class TestFirst extends WebDriverSettings {
     @Test
@@ -92,9 +95,8 @@ public class TestFirst extends WebDriverSettings {
         driver.get("http://prestashop-automation.qatestlab.com.ua/ru/");
         WebElement header = driver.findElement(By.id("header"));
         header.findElement(By.xpath("//*[@id = '_desktop_currency_selector']//i")).click();
-        WebElement dropButton = driver.findElement(By.xpath("//a[@title='Доллар США']"));
-        dropButton.click();
-       WebElement inputSearch = driver.findElement(By.cssSelector("input.ui-autocomplete-input"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@title='Доллар США']"))).click();
+        WebElement inputSearch = driver.findElement(By.cssSelector("input.ui-autocomplete-input"));
         inputSearch.sendKeys("dress");
         inputSearch.click();
         WebElement button = driver.findElement(By.cssSelector("button"));
@@ -102,7 +104,7 @@ public class TestFirst extends WebDriverSettings {
         WebElement element = driver.findElement(By.xpath("//div[@class ='row sort-by-row']"));
         element.findElement(By.xpath("//a[@class ='select-title']")).click();
         WebElement current = driver.findElement(By.xpath("//div[@class ='dropdown-menu']"));
-        current.findElement(By.linkText("Цене: от высокой к низкой")).click();;
+        current.findElement(By.linkText("Цене: от высокой к низкой")).click();
     }
 
     @Test
@@ -128,6 +130,59 @@ public class TestFirst extends WebDriverSettings {
         String currentStr = validatorSort.getText();
         if (currentStr.equals("Цене: от высокой к низкой" +"\n" + "\uE5C5")) {
             System.out.println("Товары отсортированы по цене.");
+        }
+     }
+    @Test
+     public void validatorPrice() {
+        System.out.println("Для товаров со скидкой указана скидка в процентах вместе с ценой до и после скидки." +
+                           " Необходимо проверить, что цена до и после скидки совпадает с указанным размером скидки.\n");
+        driver.get("http://prestashop-automation.qatestlab.com.ua/ru/");
+        WebElement header = driver.findElement(By.id("header"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id = '_desktop_currency_selector']//i"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@title='Доллар США']"))).click();
+        WebElement inputSearch = driver.findElement(By.cssSelector("input.ui-autocomplete-input"));
+        inputSearch.sendKeys("dress");
+        inputSearch.click();
+        WebElement button = driver.findElement(By.cssSelector("button"));
+        button.click();
+        WebElement element = driver.findElement(By.xpath("//div[@class ='row sort-by-row']"));
+        element.findElement(By.xpath("//a[@class ='select-title']")).click();
+        WebElement current = driver.findElement(By.xpath("//div[@class ='dropdown-menu']"));
+        current.findElement(By.linkText("Цене: от высокой к низкой")).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class ='products row']")));
+        WebElement elementCurrent = driver.findElement(By.xpath("//article[@data-id-product='5']"));
+        elementCurrent.findElement(By.xpath("div[@class = 'thumbnail-container']")).click();
+
+        System.out.print("Цена без скидки: ");
+        WebElement price = driver.findElement(By.cssSelector(".regular-price"));
+        price.findElement(By.xpath("//span[contains(text(), '1,14')]"));
+        String priceStr = price.getText();
+        priceStr = priceStr.replaceAll("\\$"," ");
+        priceStr = priceStr.replace(",",".");
+        Float priceNum = Float.valueOf(priceStr);
+        System.out.println(priceNum);
+
+        System.out.print("Цена со скидкой: ");
+        WebElement new_price = driver.findElement(By.cssSelector(".current-price"));
+        new_price.findElement(By.xpath("//span[@itemprop ='price']"));
+        new_price.findElement(By.xpath("//span[contains(text(), '1,08')]"));
+        String new_priceStr = new_price.getText();
+        new_priceStr = new_priceStr.replaceAll("\\$ СОХРАНИТЬ 5\\%"," ");
+        new_priceStr = new_priceStr.replace(",",".");
+        Double new_priceNum = Double.valueOf(new_priceStr);
+        System.out.println(new_priceNum);
+
+        double discount_percent = 5;
+        System.out.println("Проверочный процент скидки: " + discount_percent);
+        double discount_value = priceNum * discount_percent / 100;
+        double discount_price = priceNum - discount_value;
+        double discount_price_round = Precision.round(discount_price, 2);
+
+        if(new_priceNum.equals(discount_price_round)) {
+            System.out.println("Цена до и после скидки совпадает с указанным размером скидки.\n");
+        }else {
+            System.out.println("Цена до и после скидки не совпадает с указанным размером скидки.\n");
         }
     }
 }
