@@ -1,35 +1,41 @@
-package ua.com.prestaShopAutomationQatestlab;
+package ua.com.prestaShopAutomationQatestlab.testFirst;
 import org.apache.commons.math3.util.Precision;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.math.BigDecimal;
+public class TestFirstPage {
 
-public class TestFirst extends WebDriverSettings {
-    @Test
-    public void OpenSite() {
-        System.out.println("Открыть главную страницу сайта:\n");
-        //driver.manage().window().setSize(new Dimension(100,100));
-        driver.get("http://prestashop-automation.qatestlab.com.ua/ru/");
+    private  WebDriver driver;
+    private WebDriverWait wait;
+    public TestFirstPage(WebDriver driver) {
+        this.driver = driver;
+        wait = new WebDriverWait(driver,10);
+    }
+    @FindBy(id = "header")
+    private WebElement header;
+    private WebElement dropButton;
+    private By desktop_currency_selector = By.xpath("//*[@id='_desktop_currency_selector']//i");
+    private By currency = By.xpath(("//a[@title='Доллар США']"));
 
+    public void getStarted () {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(desktop_currency_selector)).click();
+        dropButton = driver.findElement(currency);
+        dropButton.click();
+    }
+    public void open() {
+    System.out.println("Открыть главную страницу сайта:\n");
+    driver.get("http://prestashop-automation.qatestlab.com.ua/ru/");
     }
 
-    @Test
-    public void Price() {
+    public void price() {
         System.out.println("Выполнить проверку, что цена продуктов в секции " +
                 "\"Популярные товары\" указана в соответствии с" +
                 " установленной валютой в шапке сайта (USD, EUR, UAH): ");
         driver.get("http://prestashop-automation.qatestlab.com.ua/ru/");
-        // WebElement header = driver.findElement(By.id("header"));
-        // header.findElement(By.xpath("//*[@id='_desktop_currency_selector']//i"));
         WebElement current = driver.findElement(By.xpath("//span[contains(text(), 'UAH ₴')]"));
         String currentStr = current.getText().trim();
         if (currentStr.equals("UAH ₴")) {
@@ -37,39 +43,28 @@ public class TestFirst extends WebDriverSettings {
         }
     }
 
-    @Test
     public void showPrice() {
         System.out.println("Установить показ цены в USD используя" +
                 "выпадающий список в шапке сайта.\n");
         driver.get("http://prestashop-automation.qatestlab.com.ua/ru/");
-        WebElement header = driver.findElement(By.id("header"));
-        header.findElement(By.xpath("//*[@id='_desktop_currency_selector']//i")).click();
-        WebElement dropButton = driver.findElement(By.xpath("//a[@title='Доллар США']"));
-        dropButton.click();
         WebElement current = driver.findElement(By.xpath("//span[contains(text(), 'USD $')]"));
         String currentStr = current.getText().trim();
         System.out.println("Выбрана валюта: " + currentStr);
     }
 
-    @Test
-    public void Search() {
+    public void search() {
         System.out.println("Выполнить поиск в каталоге по слову “dress.”");
         driver.get("http://prestashop-automation.qatestlab.com.ua/ru/");
         WebElement inputSearch = driver.findElement(By.cssSelector("input.ui-autocomplete-input"));
         inputSearch.sendKeys("dress");
         inputSearch.click();
-
     }
-    @Test
+
     public void validatorSearch() {
         System.out.println("Выполнить проверку, что страница \"Результаты поиска\" " +
                 "содержит надпись \"Товаров: x\", где x -" +
                 " количество действительно найденных товаров.\n");
         driver.get("http://prestashop-automation.qatestlab.com.ua/ru/");
-        WebElement header = driver.findElement(By.id("header"));
-        header.findElement(By.xpath("//*[@id='_desktop_currency_selector']//i")).click();
-        WebElement dropButton = driver.findElement(By.xpath("//a[@title='Доллар США']"));
-        dropButton.click();
         WebElement inputSearch = driver.findElement(By.cssSelector("input.ui-autocomplete-input"));
         inputSearch.sendKeys("dress");
         inputSearch.click();
@@ -89,13 +84,9 @@ public class TestFirst extends WebDriverSettings {
         }
     }
 
-    @Test
     public void sort () {
         System.out.println("Установить сортировку \"от высокой к низкой.\"\n");
         driver.get("http://prestashop-automation.qatestlab.com.ua/ru/");
-        WebElement header = driver.findElement(By.id("header"));
-        header.findElement(By.xpath("//*[@id = '_desktop_currency_selector']//i")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@title='Доллар США']"))).click();
         WebElement inputSearch = driver.findElement(By.cssSelector("input.ui-autocomplete-input"));
         inputSearch.sendKeys("dress");
         inputSearch.click();
@@ -107,15 +98,11 @@ public class TestFirst extends WebDriverSettings {
         current.findElement(By.linkText("Цене: от высокой к низкой")).click();
     }
 
-    @Test
     public void validatorSort () {
-       System.out.println("Проверить, что товары отсортированы по цене, " +
-                          "при этом некоторые товары могут быть со скидкой," +
-                          "и при сортировке используется цена без скидки.");
+        System.out.println("Проверить, что товары отсортированы по цене, " +
+                "при этом некоторые товары могут быть со скидкой," +
+                "и при сортировке используется цена без скидки.");
         driver.get("http://prestashop-automation.qatestlab.com.ua/ru/");
-        WebElement header = driver.findElement(By.id("header"));
-        header.findElement(By.xpath("//*[@id = '_desktop_currency_selector']//i")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@title='Доллар США']"))).click();
         WebElement inputSearch = driver.findElement(By.cssSelector("input.ui-autocomplete-input"));
         inputSearch.sendKeys("dress");
         inputSearch.click();
@@ -131,15 +118,12 @@ public class TestFirst extends WebDriverSettings {
         if (currentStr.equals("Цене: от высокой к низкой" +"\n" + "\uE5C5")) {
             System.out.println("Товары отсортированы по цене.");
         }
-     }
-    @Test
-     public void validatorPrice() {
+    }
+
+    public void validatorPrice() {
         System.out.println("Для товаров со скидкой указана скидка в процентах вместе с ценой до и после скидки." +
-                           " Необходимо проверить, что цена до и после скидки совпадает с указанным размером скидки.\n");
+                " Необходимо проверить, что цена до и после скидки совпадает с указанным размером скидки.\n");
         driver.get("http://prestashop-automation.qatestlab.com.ua/ru/");
-        WebElement header = driver.findElement(By.id("header"));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id = '_desktop_currency_selector']//i"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@title='Доллар США']"))).click();
         WebElement inputSearch = driver.findElement(By.cssSelector("input.ui-autocomplete-input"));
         inputSearch.sendKeys("dress");
         inputSearch.click();
@@ -186,5 +170,3 @@ public class TestFirst extends WebDriverSettings {
         }
     }
 }
-
-
