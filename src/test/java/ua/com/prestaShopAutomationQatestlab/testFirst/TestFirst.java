@@ -11,14 +11,18 @@ public class TestFirst extends WebDriverSettings {
     @Test
     public void TestProject() {
         TestFirstPage testFirstPage = PageFactory.initElements(driver, TestFirstPage.class);
-        testFirstPage.open();
-        testFirstPage.price();
+        //Сценарий:
+        testFirstPage.open();             //  1
+        testFirstPage.getPrice();         //  2
         testFirstPage.getStarted();
-        testFirstPage.showPrice();
-        testFirstPage.search();
-        testFirstPage.validatorSearch();
-        testFirstPage.sort();
-        testFirstPage.validatorSort();
-        testFirstPage.validatorPrice();
+        testFirstPage.showPrice();        //  3
+        testFirstPage.search();           //  4
+        testFirstPage.validatorSearch();  //  5,6
+        testFirstPage.sort();             //  7
+        testFirstPage.validatorSort();    //  8
+        testFirstPage.validatorPrice();   //  9
+
     }
+
+
 }

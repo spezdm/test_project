@@ -1,0 +1,95 @@
+
+Starting ChromeDriver 80.0.3987.106 (f68069574609230cf9b635cd784cfb1bf81bb53a-refs/branch-heads/3987@{#882}) on port 41303
+Only local connections are allowed.
+Please protect ports used by ChromeDriver and related test frameworks to prevent access by malicious code.
+мар. 23, 2020 8:06:48 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+test start
+Открыть главную страницу сайта:
+
+[1584986812.626][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986812.752][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986812.867][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986812.979][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986815.485][SEVERE]: Timed out receiving message from renderer: 0.100
+Выполнить проверку, что цена продуктов в секции "Популярные товары" указана в соответствии с установленной валютой в шапке сайта (USD, EUR, UAH): 
+[1584986817.460][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986817.635][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986818.202][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986818.502][SEVERE]: Timed out receiving message from renderer: 0.100
+Популярные товары указаны в валюте: UAH ?
+[1584986821.656][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986822.489][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986822.866][SEVERE]: Timed out receiving message from renderer: 0.100
+Установить показ цены в USD используявыпадающий список в шапке сайта.
+
+[1584986824.005][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986824.113][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986824.222][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986824.340][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986824.542][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986825.186][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986825.479][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986825.664][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986826.199][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986826.666][SEVERE]: Timed out receiving message from renderer: 0.100
+Выбрана валюта: USD $
+Выполнить поиск в каталоге по слову “dress.”
+[1584986828.069][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986828.261][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986828.764][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986829.230][SEVERE]: Timed out receiving message from renderer: 0.100
+Выполнить проверку, что страница "Результаты поиска" содержит надпись "Товаров: x", где x - количество действительно найденных товаров.
+
+[1584986831.170][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986831.338][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986831.994][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986832.159][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986832.543][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986835.101][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986835.865][SEVERE]: Timed out receiving message from renderer: 0.100
+Товаров: 7.
+Проверить, что цена всех показанных результатов отображается в долларах.
+
+Цена в: USD $
+Установить сортировку "от высокой к низкой."
+
+[1584986838.089][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986838.380][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986838.784][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986838.960][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986839.308][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986841.491][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986841.688][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986842.271][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986842.824][SEVERE]: Timed out receiving message from renderer: 0.100
+Проверить, что товары отсортированы по цене, при этом некоторые товары могут быть со скидкой,и при сортировке используется цена без скидки.
+[1584986846.159][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986846.317][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986847.278][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986850.090][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986850.209][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986850.948][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986851.353][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986851.639][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986852.016][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986852.374][SEVERE]: Timed out receiving message from renderer: 0.100
+Товары отсортированы по цене.
+Для товаров со скидкой указана скидка в процентах вместе с ценой до и после скидки. Необходимо проверить, что цена до и после скидки совпадает с указанным размером скидки.
+
+[1584986856.416][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986857.078][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986857.279][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986859.588][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986859.833][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986864.345][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986864.474][SEVERE]: Timed out receiving message from renderer: 0.100
+[1584986865.314][SEVERE]: Timed out receiving message from renderer: 0.100
+Цена без скидки: 1.14
+Цена со скидкой: 1.08
+Проверочный процент скидки: 5.0
+Цена до и после скидки совпадает с указанным размером скидки.
+
+test close
+
+

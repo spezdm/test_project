@@ -18,6 +18,7 @@ public class TestFirstPage {
     @FindBy(id = "header")
     private WebElement header;
     private WebElement dropButton;
+
     private By desktop_currency_selector = By.xpath("//*[@id='_desktop_currency_selector']//i");
     private By currency = By.xpath(("//a[@title='Доллар США']"));
 
@@ -26,12 +27,13 @@ public class TestFirstPage {
         dropButton = driver.findElement(currency);
         dropButton.click();
     }
+
     public void open() {
     System.out.println("Открыть главную страницу сайта:\n");
     driver.get("http://prestashop-automation.qatestlab.com.ua/ru/");
     }
 
-    public void price() {
+    public void getPrice() {
         System.out.println("Выполнить проверку, что цена продуктов в секции " +
                 "\"Популярные товары\" указана в соответствии с" +
                 " установленной валютой в шапке сайта (USD, EUR, UAH): ");
@@ -133,7 +135,6 @@ public class TestFirstPage {
         element.findElement(By.xpath("//a[@class ='select-title']")).click();
         WebElement current = driver.findElement(By.xpath("//div[@class ='dropdown-menu']"));
         current.findElement(By.linkText("Цене: от высокой к низкой")).click();
-
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class ='products row']")));
         WebElement elementCurrent = driver.findElement(By.xpath("//article[@data-id-product='5']"));
         elementCurrent.findElement(By.xpath("div[@class = 'thumbnail-container']")).click();
